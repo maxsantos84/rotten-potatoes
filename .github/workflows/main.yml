@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI-CD
+name: CI
 
 
 on:
@@ -31,6 +31,19 @@ jobs:
           tags: |
             maxsantos84/rottenpotatoes:latest
             maxsantos84/rottenpotatoes:${{ github.run_number }}
+            
+  CD:
+    runs-on: ubuntu-latest
+    steps: 
+      - uses: actions/checkout@v2
+      - name: Kubernetes Set Context
+        uses: Azure/k8s-set-context@v2
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.KUBECONFIG }}
+
+
+
             
 
 
